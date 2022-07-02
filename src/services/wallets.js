@@ -15,11 +15,13 @@ const createWallet = () => async () => {
   accounts.push({
     address: wallet.address,
     privateKey: wallet.privateKey,
+    publicKey: wallet.publicKey,
   });
   const result = {
     id: accounts.length,
     address: wallet.address,
     privateKey: wallet.privateKey,
+    publicKey: wallet.publicKey,
   };
   return result;
 };
