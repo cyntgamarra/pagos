@@ -32,3 +32,9 @@ jobs:
           INFURA_API_KEY: ${{secrets.INFURA_API_KEY}}
           MNEMONIC: ${{secrets.MNEMONIC}}
         run: npm run deploy-kovan
+      - name: Deploy to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: 'spotifiuby-pagos'
+          heroku_email: 'fmonpelat@fi.uba.ar'
