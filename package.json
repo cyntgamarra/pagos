@@ -7,7 +7,7 @@
   "dependencies": {
     "hardhat": "2.0.6",
     "hardhat-deploy": "0.7.4",
-    "hardhat-deploy-ethers": "^0.3.0-beta.7",
+    "hardhat-deploy-ethers": "^0.3.0-beta.13",
     "solc": "0.7.4",
     "dotenv": "8.2.0",
     "fastify": "3.14.2",
