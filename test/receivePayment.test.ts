@@ -1,7 +1,7 @@
 import chai from "chai";
 import { waffle, ethers, getNamedAccounts } from "hardhat";
 import { fixtureDeployedBasicPayments } from "./common-fixtures";
-import { ContractTransaction } from "ethers";
+import { ContractTransaction, Signer } from "ethers";
 import { BasicPayments } from "../typechain";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/dist/src/signer-with-address";
 import { BigNumber } from "@ethersproject/bignumber/lib/bignumber";
@@ -39,7 +39,7 @@ const makeTestsPaymentToContract = (paymentFunction: PaymentFunction, functionNa
             const { sender: senderAddress } = await getNamedAccounts();
             sender = await ethers.getSigner(senderAddress);
             amountToBeSentPreviously = await basicPayments.sentPayments(sender.address);
-            paymentTx = await paymentFunction(basicPayments.connect(sender), amountToBeSent);
+            paymentTx = await paymentFunction(basicPayments.connect(sender as Signer), amountToBeSent);
           });
           it(`THEN the sender decreases its balance in ${amountToBeSentInEthers} ethers`, async function () {
             return expect(paymentTx).to.changeEtherBalance(sender, amountToBeSent.mul(-1));
