@@ -31,4 +31,4 @@ jobs:
           ssh://git@github.com/
       - run: npm ci
       - run: npm test
-      - run: npm run lint
+      #- run: npm run lint
