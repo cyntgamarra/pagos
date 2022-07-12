@@ -35,7 +35,7 @@ The following endpoints are available:
 ### Usage example
 
 ```sh
-$ http POST http://localhost:3000/wallet
+$ http POST http://localhost:5000/wallet
 HTTP/1.1 200 OK
 Connection: keep-alive
 Date: Sun, 08 Aug 2021 19:26:53 GMT
@@ -50,7 +50,7 @@ content-type: application/json; charset=utf-8
     "publicKey": "0x04a5a8767017f752cd2f84c97253283c742a568d4502f5a5dd89504bf9343cdb89dd"
 }
 
-$ http POST http://localhost:3000/wallet
+$ http POST http://localhost:5000/wallet
 HTTP/1.1 200 OK
 Connection: keep-alive
 Date: Sun, 08 Aug 2021 19:26:54 GMT
@@ -65,7 +65,7 @@ content-type: application/json; charset=utf-8
     "publicKey": "0x0253283c742a568d4dccc5bd933a9e050b54586dfa950e834a1cb4384a1b7655dd"
 }
 
-$ http POST http://localhost:3000/deposit senderId=1 amountInEthers='0.01'
+$ http POST http://localhost:5000/deposit privateKey=1 amountInEthers='0.01'
 HTTP/1.1 200 OK
 Connection: keep-alive
 Date: Sun, 08 Aug 2021 19:27:38 GMT
@@ -98,7 +98,7 @@ content-type: application/json; charset=utf-8
     }
 }
 
-$ http GET http://localhost:3000/deposit/0x9f98447de34d3245ce1976956334336a6302befc4f204ac44a7cac0526caa82d
+$ http GET http://localhost:5000/deposit/0x9f98447de34d3245ce1976956334336a6302befc4f204ac44a7cac0526caa82d
 HTTP/1.1 200 OK
 Connection: keep-alive
 Date: Sun, 08 Aug 2021 19:28:00 GMT
