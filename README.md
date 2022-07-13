@@ -29,8 +29,9 @@ The following endpoints are available:
 - Create wallet: POST /wallet - No body
 - Get wallets: GET /wallet
 - Get wallet: GET /wallet/:id:
-- Deposit ethers into the Smart contract: POST /deposit - Body params: senderId(integer), amountInEthers(string)
+- Deposit ethers into the Smart contract: POST /deposit - Body params: privateKey(integer), amountInEthers(string)
 - Get deposit receipt: GET /deposit/:txHash:
+- Send ethers to another wallet: POST /send - Body params: privateKey(integer), amountInEthers(string)
 
 ### Usage example
 
@@ -112,6 +113,38 @@ content-type: application/json; charset=utf-8
         "type": "BigNumber"
     },
     "senderAddress": "0x7E039A00fFFD8d8C898e77e52351c799C99D3a2D"
+}
+
+$ http POST http://localhost:5000/sendPayment privateKey=0x3592321048c amountInEthers='0.0000000000000001'
+HTTP/1.1 200 OK
+Connection: keep-alive
+Date: Wed, 13 Jul 2022 01:19:39 GMT
+content-length: 528
+content-type: application/json; charset=utf-8
+
+{
+    "chainId": 42,
+    "data": "0xd0e30db0",
+    "from": "0x1730a20a41",
+    "gasLimit": {
+        "hex": "0x6d78",
+        "type": "BigNumber"
+    },
+    "gasPrice": {
+        "hex": "0x9502f907",
+        "type": "BigNumber"
+    },
+    "hash": "0x9ede78739d99744d563fbfde3",
+    "nonce": 2,
+    "r": "0x4888c320a2678ec6c8e7554194be5cdff3d7cdbd1b54f90336e947269edd15a7",
+    "s": "0x72ca63f228bdbba4b0fb006200e11870a6dd9785d35981418a16b2e805c986e0",
+    "to": "0x3592321048c",
+    "type": null,
+    "v": 120,
+    "value": {
+        "hex": "0x64",
+        "type": "BigNumber"
+    }
 }
 
 ```
