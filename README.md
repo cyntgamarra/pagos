@@ -31,7 +31,7 @@ The following endpoints are available:
 - Get wallet: GET /wallet/:id:
 - Deposit ethers into the Smart contract: POST /deposit - Body params: privateKey(integer), amountInEthers(string)
 - Get deposit receipt: GET /deposit/:txHash:
-- Send ethers to another wallet: POST /send - Body params: privateKey(integer), amountInEthers(string)
+- Send ethers to another wallet: POST /sendPayment  - Body params: privateKey(integer), amountInEthers(string)
 
 ### Usage example
 
@@ -115,7 +115,7 @@ content-type: application/json; charset=utf-8
     "senderAddress": "0x7E039A00fFFD8d8C898e77e52351c799C99D3a2D"
 }
 
-$ http POST http://localhost:5000/sendPayment privateKey=0x3592321048c amountInEthers='0.0000000000000001'
+$ http POST http://localhost:5000/sendPayment privateKey=0x3592321048c amountInEthers='0.001'
 HTTP/1.1 200 OK
 Connection: keep-alive
 Date: Wed, 13 Jul 2022 01:19:39 GMT
