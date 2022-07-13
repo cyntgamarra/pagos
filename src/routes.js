@@ -2,7 +2,7 @@ const getWalletData = require("./handlers/getWalletHandler");
 const getWalletsData = require("./handlers/getWalletsHandler");
 const createWallet = require("./handlers/createWalletHandler");
 const createDeposit = require("./handlers/createDepositHandler");
-const sendPayment = require("./handlers/sendPaymentHandler");
+const sendPayment = require("./handlers/sendPaymentsHandler");
 const getDeposit = require("./handlers/getDepositHandler");
 
 function getWalletDataRoute({ services, config }) {

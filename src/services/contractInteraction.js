@@ -1,6 +1,6 @@
 const ethers = require("ethers");
 const getDepositHandler = require("../handlers/getDepositHandler");
-const sendPayments = require("../handlers/sendPaymentsHandler");
+const _sendPayment = require("../handlers/sendPaymentsHandler");
 
 const getContract = (config, wallet) => {
   return new ethers.Contract(config.contractAddress, config.contractAbi, wallet);
