@@ -1,4 +1,4 @@
-FROM node:12.18.1
+FROM node:12.18.4
 
 # Install Heroku GPG dependencies
 RUN apt-get update && apt-get install -y gpg apt-transport-https gpg-agent curl ca-certificates
