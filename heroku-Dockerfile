@@ -1,7 +1,7 @@
 FROM node:12.18.1
 
 # Install Heroku GPG dependencies
-RUN apt-get update && apt-get -y gpg apt-transport-https gpg-agent curl ca-certificates
+RUN apt-get update && apt-get install -y gpg apt-transport-https gpg-agent curl ca-certificates
 
 # Add Datadog repository and signing keys
 ENV DATADOG_APT_KEYRING="/usr/share/keyrings/datadog-archive-keyring.gpg"
