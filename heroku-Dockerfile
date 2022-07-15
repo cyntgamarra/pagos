@@ -20,18 +20,19 @@ RUN curl -o /tmp/DATADOG_APT_KEY_382E94DE.public "${DATADOG_APT_KEYS_URL}/DATADO
 RUN apt-get update && apt-get -y --force-yes install --reinstall datadog-agent
 
 # Create app directory
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # Copy heroku entrypoint script
-COPY heroku/heroku-entrypoint.sh /usr/src/app/
-
-# Bundle app source
-COPY . .
+COPY heroku/heroku-entrypoint.sh /app/
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
 RUN npm install
+
+# Bundle app source
+COPY . /app
+
 
 #Deploy SmartContract in Kovan
 #RUN npm run deploy-kovan
@@ -48,4 +49,4 @@ ENV DD_APM_ENABLED=true
 COPY heroku/datadog-config/ /etc/datadog-agent/
 
 # Use heroku entrypoint
-RUN ["chmod", "+x", "/usr/src/app/heroku/heroku-entrypoint.sh"]
+CMD ["/heroku/heroku-entrypoint.sh"]
