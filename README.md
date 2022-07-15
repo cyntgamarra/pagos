@@ -29,13 +29,14 @@ The following endpoints are available:
 - Create wallet: POST /wallet - No body
 - Get wallets: GET /wallet
 - Get wallet: GET /wallet/:id:
-- Deposit ethers into the Smart contract: POST /deposit - Body params: senderId(integer), amountInEthers(string)
+- Deposit ethers into the Smart contract: POST /deposit - Body params: privateKey(integer), amountInEthers(string)
 - Get deposit receipt: GET /deposit/:txHash:
+- Send ethers to another wallet: POST /sendPayment  - Body params: privateKey(integer), amountInEthers(string)
 
 ### Usage example
 
 ```sh
-$ http POST http://localhost:3000/wallet
+$ http POST http://localhost:5000/wallet
 HTTP/1.1 200 OK
 Connection: keep-alive
 Date: Sun, 08 Aug 2021 19:26:53 GMT
@@ -50,7 +51,7 @@ content-type: application/json; charset=utf-8
     "publicKey": "0x04a5a8767017f752cd2f84c97253283c742a568d4502f5a5dd89504bf9343cdb89dd"
 }
 
-$ http POST http://localhost:3000/wallet
+$ http POST http://localhost:5000/wallet
 HTTP/1.1 200 OK
 Connection: keep-alive
 Date: Sun, 08 Aug 2021 19:26:54 GMT
@@ -65,7 +66,7 @@ content-type: application/json; charset=utf-8
     "publicKey": "0x0253283c742a568d4dccc5bd933a9e050b54586dfa950e834a1cb4384a1b7655dd"
 }
 
-$ http POST http://localhost:3000/deposit senderId=1 amountInEthers='0.01'
+$ http POST http://localhost:5000/deposit privateKey=1 amountInEthers='0.01'
 HTTP/1.1 200 OK
 Connection: keep-alive
 Date: Sun, 08 Aug 2021 19:27:38 GMT
@@ -98,7 +99,7 @@ content-type: application/json; charset=utf-8
     }
 }
 
-$ http GET http://localhost:3000/deposit/0x9f98447de34d3245ce1976956334336a6302befc4f204ac44a7cac0526caa82d
+$ http GET http://localhost:5000/deposit/0x9f98447de34d3245ce1976956334336a6302befc4f204ac44a7cac0526caa82d
 HTTP/1.1 200 OK
 Connection: keep-alive
 Date: Sun, 08 Aug 2021 19:28:00 GMT
@@ -112,6 +113,38 @@ content-type: application/json; charset=utf-8
         "type": "BigNumber"
     },
     "senderAddress": "0x7E039A00fFFD8d8C898e77e52351c799C99D3a2D"
+}
+
+$ http POST http://localhost:5000/sendPayment privateKey=0x3592321048c amountInEthers='0.001'
+HTTP/1.1 200 OK
+Connection: keep-alive
+Date: Wed, 13 Jul 2022 01:19:39 GMT
+content-length: 528
+content-type: application/json; charset=utf-8
+
+{
+    "chainId": 42,
+    "data": "0xd0e30db0",
+    "from": "0x1730a20a41",
+    "gasLimit": {
+        "hex": "0x6d78",
+        "type": "BigNumber"
+    },
+    "gasPrice": {
+        "hex": "0x9502f907",
+        "type": "BigNumber"
+    },
+    "hash": "0x9ede78739d99744d563fbfde3",
+    "nonce": 2,
+    "r": "0x4888c320a2678ec6c8e7554194be5cdff3d7cdbd1b54f90336e947269edd15a7",
+    "s": "0x72ca63f228bdbba4b0fb006200e11870a6dd9785d35981418a16b2e805c986e0",
+    "to": "0x3592321048c",
+    "type": null,
+    "v": 120,
+    "value": {
+        "hex": "0x64",
+        "type": "BigNumber"
+    }
 }
 
 ```

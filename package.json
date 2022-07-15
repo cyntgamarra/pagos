@@ -1,15 +1,16 @@
 {
-  "name": "BasicPayments",
+  "name": "basic_payments",
   "version": "1.0.0",
   "description": "BasicPayments es un proyecto hecho con fines educativos donde los usuarios pueden crear proyectos que son fundeados por inversores angeles(con inversiones tipo seed o semillas) y cada proyecto tiene asignado un revisor que es el encargado de revisar que el mismo avance. NO USAR EN PRODUCCION!",
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@nomiclabs/hardhat-docker": "^2.0.2",
+    "dotenv": "8.2.0",
     "hardhat": "2.0.6",
     "hardhat-deploy": "0.7.4",
     "hardhat-deploy-ethers": "0.3.0-beta.7",
-    "solc": "0.7.4",
-    "dotenv": "8.2.0"
+    "solc": "0.7.4"
   },
   "engines": {
     "node": "12.18.4"
