@@ -3,7 +3,7 @@ function schema() {
     params: {
       type: "object",
       properties: {
-        privateKey: {
+        address: {
           type: "string",
         },
         amountInEthers: {
@@ -11,13 +11,13 @@ function schema() {
         },
       },
     },
-    required: ["privateKey", "amountInEthers"],
+    required: ["address", "amountInEthers"],
   };
 }
 
-function handler({ contractInteraction, walletService }) {
+function handler({ contractInteraction }) {
   return async function (req) {
-    return contractInteraction.sendPayment(walletService.getWallet(req.body.privateKey), req.body.amountInEthers);
+    return contractInteraction.sendPayment(req.body.address, req.body.amountInEthers);
   };
 }
 

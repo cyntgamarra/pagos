@@ -45,12 +45,11 @@ const deposit = ({ config }) => async (senderWallet, amountToSend) => {
 const sendPayments = {};
 
 
-const sendPayment = ({ config }) => async (receiverWallet, amountToSend) => {
-  const senderWallet = walletService.getDeployerWallet(config);
-  //const receiver = await ethers.getSigner(receiverWallet.address);
-  fastify.log.info(`------------senderWallet----------------- ${senderWallet}`);
+const sendPayment = ({ config }) => async (receiverAddress, amountToSend) => {
+  const senderWallet = walletService({config}).getDeployerWallet();
+  fastify.log.info(`Sending ${amountToSend} to ${receiverAddress}`);
   const basicPayments = await getContract(config, senderWallet);
-  const tx = await basicPayments.sendPayment(receiverWallet,
+  const tx = await basicPayments.sendPayment(receiverAddress,
     await ethers.utils.parseEther(amountToSend).toHexString(),
   );
   tx.wait(1).then(
