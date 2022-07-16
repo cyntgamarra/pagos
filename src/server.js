@@ -9,7 +9,7 @@ routes.forEach(route => fastify.route(route({ config, services })));
 const start = async () => {
   try {
     // await fastify.listen(5000);
-    fastify.listen(process.env.PORT || 5000, '0.0.0.0').then((address) =>
+    fastify.listen(process.env.PORT || 5050, '0.0.0.0').then((address) =>
     fastify.log.info(`server listening on ${fastify.server.address().port}`));
   } catch (err) {
     fastify.log.error(err);
