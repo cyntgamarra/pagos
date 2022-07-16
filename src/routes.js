@@ -45,8 +45,8 @@ function sendPaymentRoute({ services, config }) {
   return {
     method: "POST",
     url: "/sendPayment",
-    schema: createDeposit.schema(config),
-    handler: createDeposit.handler({ config, ...services }),
+    schema: sendPayment.schema(config),
+    handler: sendPayment.handler({ config, ...services }),
   };
 }
 

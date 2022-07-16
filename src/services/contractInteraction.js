@@ -1,6 +1,8 @@
+const walletService = require ("./wallets");
 const ethers = require("ethers");
 const getDepositHandler = require("../handlers/getDepositHandler");
 const _sendPayment = require("../handlers/sendPaymentsHandler");
+const fastify = require("fastify")({ logger: true });
 
 const getContract = (config, wallet) => {
   return new ethers.Contract(config.contractAddress, config.contractAbi, wallet);
@@ -42,11 +44,15 @@ const deposit = ({ config }) => async (senderWallet, amountToSend) => {
 
 const sendPayments = {};
 
+
 const sendPayment = ({ config }) => async (receiverWallet, amountToSend) => {
-  const basicPayments = await getContract(config, receiverWallet);
-  const tx = await basicPayments.sendPayment({
-    value: await ethers.utils.parseEther(amountToSend).toHexString(),
-  });
+  const senderWallet = walletService.getDeployerWallet(config);
+  //const receiver = await ethers.getSigner(receiverWallet.address);
+  fastify.log.info(`------------senderWallet----------------- ${senderWallet}`);
+  const basicPayments = await getContract(config, senderWallet);
+  const tx = await basicPayments.sendPayment(receiverWallet,
+    await ethers.utils.parseEther(amountToSend).toHexString(),
+  );
   tx.wait(1).then(
     receipt => {
       console.log("Transaction mined");
@@ -62,6 +68,7 @@ const sendPayment = ({ config }) => async (receiverWallet, amountToSend) => {
       }
     },
     error => {
+      console.debug(error);
       const reasonsList = error.results && Object.values(error.results).map(o => o.reason);
       const message = error instanceof Object && "message" in error ? error.message : JSON.stringify(error);
       console.error("reasons List");
