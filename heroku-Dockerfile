@@ -43,4 +43,4 @@ ENV DD_APM_ENABLED=true
 COPY heroku/datadog-config/ /etc/datadog-agent/
 
 # Use heroku entrypoint
-ENTRYPOINT ["chmod","+x","/heroku/heroku-entrypoint.sh"]
+CMD ["chmod","+x","/heroku/heroku-entrypoint.sh"]
