@@ -20,20 +20,20 @@ RUN curl -o /tmp/DATADOG_APT_KEY_382E94DE.public "${DATADOG_APT_KEYS_URL}/DATADO
 RUN apt-get update && apt-get -y --force-yes install --reinstall datadog-agent
 
 # Create app directory
-WORKDIR /usr/src/app
+WORKDIR /app
+
+# Bundle app source
+COPY . .
 
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
 COPY package*.json ./
 
+# Copy heroku entrypoint script
+COPY heroku/heroku-entrypoint.sh .
+
 # Install app dependencies
 RUN npm install
-
-# Bundle app source
-COPY . .
-
-# Copy heroku entrypoint script
-COPY heroku/heroku-entrypoint.sh /usr/src/app
 
 #Ignored by heroku
 EXPOSE 5000
@@ -47,5 +47,4 @@ ENV DD_APM_ENABLED=true
 COPY heroku/datadog-config/ /etc/datadog-agent/
 
 # Use heroku entrypoint
-# CMD ["chmod","+x","/heroku/heroku-entrypoint.sh"]
-CMD [ "npm", "start" ]
+CMD ["chmod","+x","/heroku/heroku-entrypoint.sh"]
