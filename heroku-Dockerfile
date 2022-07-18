@@ -22,20 +22,16 @@ RUN apt-get update && apt-get -y --force-yes install --reinstall datadog-agent
 # Create app directory
 WORKDIR /app
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-RUN npm install
-
 # Bundle app source
 COPY . /app
 
 # Copy heroku entrypoint script
 COPY heroku/heroku-entrypoint.sh /app/
 
-
-#Deploy SmartContract in Kovan
-#RUN npm run deploy-kovan
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+RUN npm install
 
 #Ignored by heroku
 EXPOSE 5000
